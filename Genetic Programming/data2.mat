@@ -1,0 +1,42 @@
+function [ programma ] = genRndPrg(funcSet,termSet,maxD,method )
+%Random programma generator.
+%Een programma wordt opgeslagen als een rijvector in een cell array waarvan
+%de cellen strings bevatten die functies of terminals voorstellen. 
+%Een programma heeft de prefix structuur. Bij elkaar horende delen zijn af
+%te leiden uit de arity van de functies. Bv: som,som,1,2,3=som(som(1,2),3).
+
+%funcSet: lijst met toegelaten functies, bestaande uit strings met de namen van de functies.
+%termSet: lijst met toegelaten terminals, bestaande uit strings met de waarde van de terminals.
+%maxD: maximum diepte van de tree. Integer. 1ste node of terminal heeft diepte 0.
+%method: methode voor creatie random programma's. Moet de string 'grow' of 'full' bevatten.
+
+%initieer cell array
+programma={};
+
+%als de max diepte 0 is, of de methode is grow en voldaan aan de kans, dan moet er een terminal komen.
+if maxD==0 || (strcmp(method,'grow') && rand < length(termSet)/(length(termSet)+length(funcSet)) )
+%Selecteer een terminal.
+    temp = termSet{randi([1 length(termSet)])};
+    if(strcmp(temp,'random'))%Als de terminal de string 'random' is,
+%een random getal genereren voor de terminal.
+        programma {1}= num2str(round(randi(10)*rand/rand,2));
+    else%Anders de terminal uit temp behouden.
+        programma{1}= temp;
+    end
+    
+
+else%Indien niet, moet er een functie gekozen worden.
+%Kies een functie uit de lijst met functies.
+    functie=funcSet{randi([1 length(funcSet)])};
+    programma{1}=functie;
+%De arity moet opgeroepen worden.
+    [~,arity]=eval(functie);
+    %Voeg evenveel argumenten toe als de arity van de functie.
+    for i=1:arity
+%Roep de functie terug op voor recursie en kleef de opeenvolgende
+%delen achter elkaar in een cell array. Je krijgt dan een analoog
+%van de prefix notatie
+        programma=[programma,genRndPrg(funcSet,termSet,maxD-1,method)];
+    end
+end
+end
