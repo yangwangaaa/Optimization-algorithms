@@ -2,13 +2,19 @@ import numpy as np
 import math
 import sklearn
 
-# Function to create a list of random minibatches
-# Inputs:   X, Y -- Input and output data, vector
-#           mini_batch_size -- integer
-# Output:   mini_batches -- list if minibatches
-
 
 def random_mini_batches(X, Y, mini_batch_size=64, seed=0):
+	"""
+
+	Function to create a list of random minibatches
+	Inputs:
+		X, Y -- Input and output data, vector
+		mini_batch_size -- integer
+
+	Output:
+		mini_batches -- list if minibatches
+
+	"""
 
     np.random.seed(seed)
     m = X.shape[1]
@@ -40,13 +46,19 @@ def random_mini_batches(X, Y, mini_batch_size=64, seed=0):
 
     return mini_batches
 
-# Initializes the velocity
-# Input:    parameters -- python dictionary containing W and b
-# Output:   v -- dictionary containing the current velocity vW and vb and
-# sW and sb
-
 
 def initialize_adam(parameters):
+	"""
+	
+	Initializes the velocity
+
+	Input:    
+		parameters -- python dictionary containing W and b
+
+	Output:   
+		v -- dictionary containing the current velocity vW and vb and sW and sb
+
+	"""
 
     L = len(parameters) // 2  # number of layers in the neural networks
     v = {}
@@ -63,20 +75,28 @@ def initialize_adam(parameters):
     return v, s
 
 
-# Function to update neural network weights using mini batch adam
-# Inputs:   parameters -- dictionary containing W and b
-#           grads -- dictionary cointaining dW and dB
-#           v -- dictionary containing current velocity
-#           s -- dictionary containting current squared gradient
-#           beta1 -- Exponential decay hyperparameter for the first moment estimates
-#           beta2 -- Exponential decay hyperparameter for the second moment estimates
-#           epsilon -- hyperparameter preventing division by zero in Adam updates
-#           learning_rate -- scalar
-# Output:   parameters -- updated dictionary
-#           v -- moving average of the first gradient, python dictionary
-#           s -- moving average of the squared gradient, python dictionary
 def adam(parameters, grads, v, s, t, learning_rate=0.01,
          beta1=0.9, beta2=0.999, epsilon=1e-8):
+	"""
+	
+	Function to update neural network weights using mini batch adam
+
+	Inputs:   
+		parameters -- dictionary containing W and b           
+		grads -- dictionary cointaining dW and dB           
+		v -- dictionary containing current velocity
+		s -- dictionary containting current squared gradient           
+		beta1 -- Exponential decay hyperparameter for the first moment estimates           
+		beta2 -- Exponential decay hyperparameter for the second moment estimates           
+		epsilon -- hyperparameter preventing division by zero in Adam updates           
+		learning_rate -- scalar
+	
+	Output:   
+		parameters -- updated dictionary           
+		v -- moving average of the first gradient, python dictionary       
+		s -- moving average of the squared gradient, python dictionary
+	
+	"""
 
     # number of layers in the neural networks
     L = len(parameters) // 2

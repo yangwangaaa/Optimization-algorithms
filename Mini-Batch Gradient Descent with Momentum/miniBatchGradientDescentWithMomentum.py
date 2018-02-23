@@ -2,13 +2,19 @@ import numpy as np
 import math
 import sklearn
 
-# Function to create a list of random minibatches
-# Inputs:   X, Y -- Input and output data, vector
-#           mini_batch_size -- integer
-# Output:   mini_batches -- list if minibatches
-
 
 def random_mini_batches(X, Y, mini_batch_size=64, seed=0):
+	"""
+
+	Function to create a list of random minibatches
+
+	Inputs:
+		X, Y -- Input and output data, vector
+		mini_batch_size -- integer
+	Output:
+		mini_batches -- list if minibatches
+
+	"""
 
     np.random.seed(seed)
     m = X.shape[1]
@@ -40,12 +46,19 @@ def random_mini_batches(X, Y, mini_batch_size=64, seed=0):
 
     return mini_batches
 
-# Initializes the velocity
-# Input:    parameters -- python dictionary containing W and b
-# Output:   v -- dictionary containing the current velocity vW and vb
-
 
 def initialize_velocity(parameters):
+	"""
+	
+	Initializes the velocity
+	
+	Input:    
+		parameters -- python dictionary containing W and b
+	
+	Output:   
+		v -- dictionary containing the current velocity vW and vb
+
+	"""
 
     L = len(parameters) // 2  # number of layers in the neural networks
     v = {}
@@ -57,16 +70,22 @@ def initialize_velocity(parameters):
 
     return v
 
-# Function to update neural network weights using gradient descent
-# Inputs:   parameters -- dictionary containing W and b
-#           grads -- dictionary cointaining dW and dB
-#           v -- dictionary containing current velocity
-#           beta -- momentum hyperparameter, scalar
-#           learning_rate -- scalar
-# Output:   parameters -- updated dictionary
-
 
 def gradient_descent_with_momentum(parameters, grads, v, beta, learning_rate):
+	"""
+	
+	Function to update neural network weights using gradient descent
+	
+	Inputs:   
+		parameters -- dictionary containing W and b           
+		grads -- dictionary cointaining dW and dB           
+		v -- dictionary containing current velocity           
+		beta -- momentum hyperparameter, scalar           
+		learning_rate -- scalar
+	Output:   
+		parameters -- updated dictionary
+	
+	"""
 
     L = len(parameters) // 2  # number of layers in the neural networks
     # Momentum update for each parameter
