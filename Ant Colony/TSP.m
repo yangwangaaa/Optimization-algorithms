@@ -74,7 +74,7 @@ for t = 1:ParAS.tmax
     set(gca,'ytick',-90:30:90)
     cordi_pad = cordi(paden(:,t),:);
     plot(cordi_pad(:,2), cordi_pad(:,1),'r-','linewidth',4) % kortste van iteratie t route in rood
-    title(['iteratie ', num2str(t), ', lengte kortste pad = ', num2str(lengtes(t)), ' km'])
+    title(['iteration ', num2str(t), ', length shortest path = ', num2str(lengtes(t)), ' km'])
     hold off
     pause(0.1)
 end

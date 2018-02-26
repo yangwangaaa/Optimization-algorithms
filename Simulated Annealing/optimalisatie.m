@@ -14,7 +14,7 @@ ParSA.Tmin = 0.001;
 ParSA.r = 0.99;        
 ParSA.kT = 50;
 
-[xStar iteratiematrix] = simulatedAnnealing(@alpine, 2, 5, [0 100;0 100], ParSA);
-plotDoelfunctie(@alpine, [0 100], [0 100])
+[xStar iteratiematrix] = simulatedAnnealing(@alpine, 2, 5, [-10 10;-10 10], ParSA);
+plotDoelfunctie(@alpine, [-10 10], [-10 10])
 plotIteratiesColor(iteratiematrix)
-view(0,90)
+%view(0,90)
