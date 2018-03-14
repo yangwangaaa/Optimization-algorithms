@@ -36,8 +36,10 @@ cordi = [37.97, 23.72;  % Athene
     -26.20, 28.07;      % Johannesburg
     -4.33, 15.32;       % Kingshasa
     -12.03, -77.02;     % Lima
+    -17.98, -67.15;     % Oruro
     -34.87, -56.16;     % Montevideo
     -53.17, -70.93;     % Punta Arenas
+    51.05, 3.72;        % Ghent
     -33.86, 152.2];     % Sydney
 
 ParAS.fer0 = 0.00005;
