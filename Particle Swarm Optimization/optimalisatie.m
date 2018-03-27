@@ -1,6 +1,6 @@
 ParPSO.c1 = 1.3;    
 ParPSO.c2 = 1.3;
-ParPSO.aantalIteraties = 500;
+ParPSO.aantalIteraties = 100;
 ParPSO.popgrootte = 100;
 ParPSO.delta = 0.7;
 ParPSO.w = 0.7;

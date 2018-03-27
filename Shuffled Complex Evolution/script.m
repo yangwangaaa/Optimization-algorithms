@@ -6,5 +6,6 @@ ParSCE.alfa = 5;
 ParSCE.beta = 5;
 ParSCE.factor = .9;
 ParSCE.threshold = 0.05;
+ParSCE.maxit = 50;
 
 [xStar,iteratiematrix, populatiematrix] = SCE(@alpine, [0 100], ParSCE)

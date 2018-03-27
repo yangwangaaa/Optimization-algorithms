@@ -1,4 +1,4 @@
-% TSP waarbij volgende steden dienen bezocht te worden:
+% Euclidian TSP with the following cities:
 % Athene, Barcelona, Peking, Brussel, Cairo, Bangkok, Guatemala City,
 % Havana, Helsinki, Londen, Mexico City, New Delhi, Moskou, Chicago, Las
 % Vegas, Montreal, New York, Houston, Dakar, Mecca, Buenos Aires, Brasilia,
@@ -47,44 +47,55 @@ ParAS.n_ants = 50;
 ParAS.alfa = 1;
 ParAS.beta = 2;
 ParAS.rho = 0.1;
-ParAS.tmax = 100;
-ParAS.e = 30; % optionele parameter, gebruikt indien Daemon-actie geïmplementeerd wordt
-beginstad = 4; % start vanuit Brussel
+ParAS.tmax = 50;
+ParAS.e = 30;
+beginstad = 4; 
 
 [paden, lengtes] = AntSystem(cordi,ParAS,4);
 
 bestePad = paden(:, find(lengtes==min(lengtes),1,'first'));
 kortsteLengte = min(lengtes);
 
-%% figuur evolutie kortste pad op kaart: 
-lg = 18;                        % opmaakparameter
-scrsz = get(0,'ScreenSize');    % opmaakparameter
-load('World.mat');              % contouren wereld inladen
+%% Evolution on map
+lg = 18;                       
+scrsz = get(0,'ScreenSize');   
+load('World.mat');              
 figure('Position',scrsz)
+step=1;
+Ani(1) = getframe;
+im = frame2im(Ani(1)); 
+[imind,cm] = rgb2ind(im,256); 
+imwrite(imind,cm,'AntColony.gif','gif', 'Loopcount',inf);
+
 for t = 1:ParAS.tmax
     clf
     hold on
     colormap('winter')
     imagesc(-179.875:0.25:179.875,-89.875:0.25:89.875,flipud(World))
     axis([-180, 180, -90, 90])
-    scatter(cordi(:,2),cordi(:,1),'filled','black') % alle steden in zwart
-    plot(cordi(beginstad,2),cordi(beginstad,1),'go','markerfacecolor','m') % beginstad in magenta
+    scatter(cordi(:,2),cordi(:,1),'filled','black') 
+    plot(cordi(beginstad,2),cordi(beginstad,1),'go','markerfacecolor','m')
     xlabel('Longitude','fontsize',lg)
     ylabel('Latitude','fontsize',lg)
     set(gca,'fontsize',lg)
     set(gca,'xtick',-180:30:180)
     set(gca,'ytick',-90:30:90)
     cordi_pad = cordi(paden(:,t),:);
-    plot(cordi_pad(:,2), cordi_pad(:,1),'r-','linewidth',4) % kortste van iteratie t route in rood
+    plot(cordi_pad(:,2), cordi_pad(:,1),'r-','linewidth',4) 
     title(['iteration ', num2str(t), ', length shortest path = ', num2str(lengtes(t)), ' km'])
     hold off
     pause(0.1)
+    Ani(step+1) = getframe;
+    im = frame2im(Ani(step+1)); 
+    [imind,cm] = rgb2ind(im,256); 
+    imwrite(imind,cm,'AntColony.gif','gif','WriteMode','append'); 
+    step = step + 1;
 end
 
-%% figuur evolutie lengte kortste pad overheen iteraties
+%% Plot evolution over iterations
 lg = 12;
 figure()
-plot(1:ParAS.tmax,lengtes/1000, '.')
-xlabel('iteratie (-)','fontsize',lg)
-ylabel('padlengte (10^3 km)','fontsize',lg)
-title(['Evolutie lengte kortste pad overheen iteraties, \alpha = ', num2str(ParAS.alfa), ', \beta = ', num2str(ParAS.beta)],'fontsize',lg)
+plot(1:ParAS.tmax,lengtes/1000)
+xlabel('Iteration (-)','fontsize',lg)
+ylabel('Padlength (10^3 km)','fontsize',lg)
+title(['Evolution of pathlength over iterations, \alpha = ', num2str(ParAS.alfa), ', \beta = ', num2str(ParAS.beta)],'fontsize',lg)
