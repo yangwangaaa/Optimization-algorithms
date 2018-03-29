@@ -46,7 +46,7 @@ aantalBeste=1;              %Aantal programma's dat je overhoudt van vorige herh
 maxHerhalingen=1;          %Meerdere herhalingen lopen. Integer. Minstens 1.
 vervolg=true;              %Bepalen of je verder doet van een vorige run of niet.
 aantalvorig = 5;            %aantal keer programma uit vervolg herhaald wordt in nieuwe populatie
-vervolgProgramma = 'eindProgramma.dat';
+vervolgProgramma = 'weerSim.dat';
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%      Instellingen       %%%
@@ -201,41 +201,3 @@ for row = 1:ncols
     fprintf(fileID,formatSpec,programma{row});
 end
 fclose(fileID);
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%  Weergeven resultaten   %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-figure(2)
-plot(data)
-hold on
-plot(bereken(bestSequenties{end},[1:108]))
-title('Finaal resultaat')
-xlabel('maanden (1 = januari 2000)')
-ylabel('gemiddelde temperatuur (°C)')
-legend('data','fit')
-hold off
-
-if maxHerhalingen>1
-    figure(3)
-    plot(best_fitness_sequenties)
-    title('Verloop fitness')
-    xlabel('herhaling')
-    ylabel('fitness')
-elseif maxHerhalingen==1
-    figure(3)
-    plot(best_fitness)
-    title('Verloop fitness')
-    xlabel('generatie')
-    ylabel('fitness')
-end
-
-%Beste functie:
-unravel2(best{end})
-
-%Runtime
-display(start)
-display(datestr(now))
-
-
