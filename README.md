@@ -21,7 +21,7 @@ Genetic optimization algorithms are inspired on the mutations and genetic crossi
 
 Genetic Programming tries to fit a combination of functions to a given dataset.
 
-<img src="https://github.com/WardQ/Optimization-algorithms/blob/master/Genetic%20Programming/finalResult.png" width="400><img src="https://github.com/WardQ/Optimization-algorithms/blob/master/Genetic%20Programming/error.png">
+<img src="https://github.com/WardQ/Optimization-algorithms/blob/master/Genetic%20Programming/finalResult.png" width="400"><img src="https://github.com/WardQ/Optimization-algorithms/blob/master/Genetic%20Programming/error.png" width="400">
 
 ## [Gradient Descent](https://github.com/WardQ/Optimization-algorithms/tree/master/Gradient%20Descent)
 
@@ -49,4 +49,5 @@ Shfuffled Complex Evolution (here in the Nealder-Mead variant) is another optimi
 ## [Simulated Annealing](https://github.com/WardQ/Optimization-algorithms/tree/master/Simulated%20Annealing)
 
 Simulated Annealing is an extention of gradient descent, where certain 'worse' solutions can be accepted temporarely. It succeeds in escaping local minima.
+
 ![](https://github.com/WardQ/Optimization-algorithms/blob/master/Simulated%20Annealing/alpine_simulated_annealing.png)
